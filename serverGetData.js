@@ -7,11 +7,8 @@
 const express = require("express");
 
 // Following line is where NodeJS server is coupled to the HTML
-const moduleToFetch = require("./index");
-const getDatabase = moduleToFetch.getDatabase;
-// const queryBySource = moduleToFetch.queryDBBySourcePagination;
-const queryDBBySourcePagination = moduleToFetch.queryDBBySourcePagination;
-// const newEntryToDatabase = moduleToFetch.newEntryToDatabase;
+const moduleToFetch = require("./indexAlt");
+const getBlockData = moduleToFetch.getBlockData;
 const port = 8000;
 
 const app = express();
@@ -65,18 +62,8 @@ app.get("/users", async (req, res) => {
 
 // CHQ: Reads all data entries from the database (Read)
 app.get("/pages", async (req, res) => {
-  const pages = await getDatabase();
+  const pages = await getBlockData();
   res.json(pages);
 });
-
-app.get("/queryBySource", async (req, res) => {
-  // const pagesWithSource = await queryDBBySourcePagination();
-
-  const pagesWithSource = await queryDBBySourcePagination()
-    .then(results => {
-    console.log('Notion database query results:', results); 
-  });
-  res.json(pagesWithSource);
-});
-
+  
 app.listen(port, console.log(`Server started on ${port}`));
