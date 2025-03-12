@@ -9,7 +9,8 @@ const express = require("express");
 // Following line is where NodeJS server is coupled to the HTML
 const moduleToFetch = require("./index");
 const getDatabase = moduleToFetch.getDatabase;
-const newEntryToDatabase = moduleToFetch.newEntryToDatabase;
+// CHQ: FIXME: commenting out submit form until it is fixed
+// const newEntryToDatabase = moduleToFetch.newEntryToDatabase;
 const port = 8000;
 
 const app = express();
@@ -46,15 +47,16 @@ app.get("/users", async (req, res) => {
 // coupled together and so could skip having to set up a backend
 // that would receive post requests entirely.
 
-app.post("/submit-form", async (req, res) => {
-  // app.post("/lalala", async (req, res) => {
-  const name = req.body.name;
-  const role = req.body.role;
-  await newEntryToDatabase(name, role);
-  // the changes here worked
-  // await newEntryToDatabase("testName", "testRole");
-  res.redirect("/");
-  res.end();
-});
+// CHQ: FIXME: commenting out submit form until it is fixed
+// app.post("/submit-form", async (req, res) => {
+//   // app.post("/lalala", async (req, res) => {
+//   const name = req.body.name;
+//   const role = req.body.role;
+//   await newEntryToDatabase(name, role);
+//   // the changes here worked
+//   // await newEntryToDatabase("testName", "testRole");
+//   res.redirect("/");
+//   res.end();
+// });
 
 app.listen(port, console.log(`Server started on ${port}`));
